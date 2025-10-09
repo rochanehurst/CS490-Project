@@ -64,6 +64,7 @@ a {
 }
 
 .logo-img {
+    background-image: var(--logo);
     height: 40px;  
     width: auto;   
     display: block;
@@ -134,8 +135,14 @@ form {
 
 input {
     padding: 0.75rem;
-    border: 2px solid #e2e8f0;
+    border: 2px solid var(--orange-accent);
     border-radius: 8px;
     font-size: 1rem;
+}
+
+h1 {
+    background-color: var(--orange-accent);
+    color: var(--bg-color);
+    border-radius: 8px;
 }
 
