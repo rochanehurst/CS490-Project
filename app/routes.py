@@ -12,9 +12,11 @@ from flask import Blueprint, render_template
 main_bp = Blueprint('main', __name__)
 
 # Route for the home page ("/")
+"""@main_bp.route("/")
+def home():
+    return render_template("login.html")"""
+
 @main_bp.route("/")
 def home():
-    return render_template("login.html")
-
-
+    return render_template("login2.html")
 

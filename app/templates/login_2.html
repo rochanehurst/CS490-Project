@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="login-container">
+    <h2>Enter your credentials:</h2>
+    <div class="credentials">
+        <input class="input username" id="username" type="email" placeholder="Enter your email...">
+        <input class="input password" id="password" type="password" placeholder="Enter your password...">
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function getInput(id){
+    const inputElement = document.getElementById(id);
+
+      // Get the text value from the input element
+      const enteredText = inputElement.value;
+
+      // Do something with the text (e.g., display it)
+      const outputParagraph = document.getElementById("output");
+      outputParagraph.textContent = "You entered: " + enteredText;
+
+      console.log("User entered:", enteredText);
+}
+</script>
+{% endblock %}
