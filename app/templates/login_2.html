@@ -6,23 +6,21 @@
     <div class="credentials">
         <input class="input username" id="username" type="email" placeholder="Enter your email...">
         <input class="input password" id="password" type="password" placeholder="Enter your password...">
+        <button class="btn btn-login" id="loginbtn">Login</button>
+        <p id="output"></p>
     </div>
 </div>
 {% endblock %}
 
 {% block scripts %}
 <script>
-function getInput(id){
-    const inputElement = document.getElementById(id);
+const myInput = document.getElementById('username');
+const myButton = document.getElementById('loginbtn');
+const outputParagraph = document.getElementById('output');
 
-      // Get the text value from the input element
-      const enteredText = inputElement.value;
-
-      // Do something with the text (e.g., display it)
-      const outputParagraph = document.getElementById("output");
-      outputParagraph.textContent = "You entered: " + enteredText;
-
-      console.log("User entered:", enteredText);
-}
+myButton.addEventListener('click', () => {
+  const inputValue = myInput.value; // Get the value
+  outputParagraph.textContent = `You entered: ${inputValue}`; // Display it
+});
 </script>
 {% endblock %}
