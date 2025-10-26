@@ -173,3 +173,7 @@ main {
 .login_2 {
     width: 50% !important;
 }
+
+.student_container {
+    width: 90%;
+}
