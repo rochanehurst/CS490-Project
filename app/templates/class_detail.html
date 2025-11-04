@@ -30,8 +30,6 @@
         <h1 class="page-title">{{ class_name }}</h1>
 
         <div class="action-buttons">
-            <!-- <button class="btn" onclick="window.location.href='{{ url_for('main.create_learning_objective') }}'">Create New LO</button>
-            <button class="btn" onclick="window.location.href='{{ url_for('main.update_grade') }}'">Update Grade</button> -->
             <a href="{{ url_for('main.create_learning_objective', class_id=class_id) }}" class="btn">Create New LO</a>
             <a href="{{ url_for('main.update_grade', class_id=class_id) }}" class="btn">Update Grade</a>
         </div>
