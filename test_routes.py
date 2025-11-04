@@ -64,51 +64,10 @@ def sample_students():
 class TestRoutes:
     """Test cases for main application routes."""
     
-    # def test_home_page_loads(self, client):
-    #     """
-    #     Test Case 1: Home page loads successfully
-        
-    #     Verifies that the home page (instructor main page) loads
-    #     and returns a 200 status code with expected content.
-    #     """
-    #     response = client.get('/')
-    #     assert response.status_code == 200
-    #     assert b'Project Clarity' in response.data
-    #     assert b'Choose Class' in response.data
-    
-    
-    # def test_instructor_main_page(self, client):
-    #     """
-    #     Test Case 2: Instructor main page displays correctly
-        
-    #     Verifies that the instructor main page shows the class selection
-    #     dropdown and form for adding new classes.
-    #     """
-    #     response = client.get('/instructor')
-    #     assert response.status_code == 200
-    #     assert b'Choose Class' in response.data
-    #     assert b'add a new Class' in response.data
-    #     assert b'Select Class' in response.data
-    
-    
-    # def test_class_detail_page_valid_id(self, client):
-    #     """
-    #     Test Case 3: Class detail page loads with valid class ID
-        
-    #     Verifies that accessing a class detail page with a valid
-    #     class ID loads successfully and displays student data.
-    #     """
-    #     response = client.get('/class/1')
-    #     assert response.status_code == 200
-    #     assert b'Adams, John' in response.data
-    #     assert b'Learning Objective' in response.data
-    #     assert b'By Students' in response.data
-    #     assert b'By Learning Objectives' in response.data
-    
     
     def test_class_detail_page_invalid_id(self, client):
         """
-        Test Case 4: Class detail page redirects for invalid class ID
+        Test Case 1: Class detail page redirects for invalid class ID
         
         Verifies that accessing a non-existent class redirects back
         to the instructor main page.
@@ -120,7 +79,7 @@ class TestRoutes:
     
     def test_select_class_form_submission(self, client):
         """
-        Test Case 5: Selecting an existing class redirects correctly
+        Test Case 2: Selecting an existing class redirects correctly
         
         Verifies that submitting the class selection form with a valid
         class ID redirects to the correct class detail page.
@@ -134,7 +93,7 @@ class TestRoutes:
     
     def test_select_class_invalid_id(self, client):
         """
-        Test Case 6: Selecting invalid class redirects to main page
+        Test Case 3: Selecting invalid class redirects to main page
         
         Verifies that submitting an invalid class ID redirects back
         to the instructor main page.
@@ -148,7 +107,7 @@ class TestRoutes:
     
     def test_add_new_class(self, client):
         """
-        Test Case 7: Adding a new class creates it successfully
+        Test Case 4: Adding a new class creates it successfully
         
         Verifies that submitting the add class form creates a new class
         and redirects to its detail page.
@@ -172,33 +131,9 @@ class TestRoutes:
         assert '/class/' in response.location
     
     
-    # def test_create_learning_objective_page(self, client):
-    #     """
-    #     Test Case 8: Create learning objective page loads
-        
-    #     Verifies that the create learning objective page loads
-    #     with the correct class context.
-    #     """
-    #     response = client.get('/create_learning_objective?class_id=1')
-    #     # Currently returns redirect or "Coming Soon" - adjust based on implementation
-    #     assert response.status_code in [200, 302]
-    
-    
-    # def test_update_grade_page(self, client):
-    #     """
-    #     Test Case 9: Update grade page loads
-        
-    #     Verifies that the update grade page loads with the
-    #     correct class context.
-    #     """
-    #     response = client.get('/update_grade?class_id=1')
-    #     # Currently returns redirect or "Coming Soon" - adjust based on implementation
-    #     assert response.status_code in [200, 302]
-    
-    
     def test_search_api_students_view(self, client):
         """
-        Test Case 10: Search API filters students correctly
+        Test Case 5: Search API filters students correctly
         
         Verifies that the search API endpoint filters students
         by name in the students view.
@@ -216,7 +151,7 @@ class TestHelperFunctions:
     
     def test_organize_by_learning_objectives(self, sample_students):
         """
-        Test Case 11: Helper function organizes data correctly
+        Test Case 6: Helper function organizes data correctly
         
         Verifies that the organize_by_learning_objectives function
         correctly groups students by mastery level for each LO.
@@ -244,7 +179,7 @@ class TestDataIntegrity:
     
     def test_sample_data_structure(self):
         """
-        Test Case 12: Sample data has correct structure
+        Test Case 7: Sample data has correct structure
         
         Verifies that the classes dictionary has the expected
         structure and required fields.
@@ -271,7 +206,7 @@ class TestEdgeCases:
     
     def test_empty_search_query(self, client):
         """
-        Test Case 13: Search with empty query returns all results
+        Test Case 8: Search with empty query returns all results
         
         Verifies that searching with an empty query returns all
         students or learning objectives.
@@ -285,7 +220,7 @@ class TestEdgeCases:
     
     def test_search_nonexistent_class(self, client):
         """
-        Test Case 14: Search for non-existent class returns error
+        Test Case 9: Search for non-existent class returns error
         
         Verifies that the search API returns a 404 error when
         searching in a non-existent class.
