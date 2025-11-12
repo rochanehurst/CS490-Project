@@ -94,55 +94,93 @@
 
             <div class="lo-list">
                 {% for lo in learning_objectives %}
-                <div class="lo-item">
+                <div class="lo-item" data-lo-name="{{ lo.name }}">
                     <div class="lo-header" onclick="toggleObjective(this)">
                         <span>{{ lo.name }}</span>
                         <div class="chevron"></div>
                     </div>
                     <div class="lo-content">
                         <!-- Students with 2 M -->
-                        <div class="mastery-group">
+                        <div class="mastery-group" data-mastery="2">
                             <div class="mastery-header">
                                 <span>Students with 2 M</span>
                                 <span class="mastery-count">{{ lo.two_m_count }}/{{ lo.total_students }}</span>
                             </div>
-                            {% for student in lo.students_with_2m %}
-                            <div class="student-row">
-                                <div class="student-name">{{ student.name }}</div>
-                                <div class="score-badge">Top Highest: {{ student.top_score }}</div>
-                                <div class="score-badge">Second Highest: {{ student.second_score }}</div>
+                            <div class="student-rows-container">
+                                {% for student in lo.students_with_2m %}
+                                <div class="student-row">
+                                    <div class="student-name">{{ student.name }}</div>
+                                    <div class="score-badge">Top Highest: {{ student.top_score }}</div>
+                                    <div class="score-badge">Second Highest: {{ student.second_score }}</div>
+                                </div>
+                                {% endfor %}
                             </div>
-                            {% endfor %}
                         </div>
 
                         <!-- Students with 1 M -->
-                        <div class="mastery-group">
+                        <div class="mastery-group" data-mastery="1">
                             <div class="mastery-header">
                                 <span>Students with 1 M</span>
                                 <span class="mastery-count">{{ lo.one_m_count }}/{{ lo.total_students }}</span>
                             </div>
-                            {% for student in lo.students_with_1m %}
-                            <div class="student-row">
-                                <div class="student-name">{{ student.name }}</div>
-                                <div class="score-badge">Top Highest: {{ student.top_score }}</div>
-                                <div class="score-badge">Second Highest: {{ student.second_score }}</div>
+                            <div class="student-rows-container">
+                                {% for student in lo.students_with_1m %}
+                                <div class="student-row">
+                                    <div class="student-name">{{ student.name }}</div>
+                                    <div class="score-badge">Top Highest: {{ student.top_score }}</div>
+                                    <div class="score-badge">Second Highest: {{ student.second_score }}</div>
+                                </div>
+                                {% endfor %}
                             </div>
-                            {% endfor %}
                         </div>
 
                         <!-- Students with 0 M -->
-                        <div class="mastery-group">
+                        <div class="mastery-group" data-mastery="0">
                             <div class="mastery-header">
                                 <span>Students with 0 M</span>
                                 <span class="mastery-count">{{ lo.zero_m_count }}/{{ lo.total_students }}</span>
                             </div>
-                            {% for student in lo.students_with_0m %}
-                            <div class="student-row">
-                                <div class="student-name">{{ student.name }}</div>
-                                <div class="score-badge">Top Highest: {{ student.top_score }}</div>
-                                <div class="score-badge">Second Highest: {{ student.second_score }}</div>
+                            <div class="student-rows-container">
+                                {% for student in lo.students_with_0m %}
+                                <div class="student-row">
+                                    <div class="student-name">{{ student.name }}</div>
+                                    <div class="score-badge">Top Highest: {{ student.top_score }}</div>
+                                    <div class="score-badge">Second Highest: {{ student.second_score }}</div>
+                                </div>
+                                {% endfor %}
                             </div>
-                            {% endfor %}
+                        </div>
+
+                        <!-- Add Student Form -->
+                        <div class="add-student-form">
+                            <h4>Add New Student to {{ lo.name }}</h4>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Student Name</label>
+                                    <select class="student-name-select" onchange="handleStudentSelect(this)">
+                                        <option value="">Select a student</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Top Highest</label>
+                                    <select class="top-score-input">
+                                        <option value="">Select</option>
+                                        <option value="M">M</option>
+                                        <option value="R">R</option>
+                                        <option value="X">X</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Second Highest</label>
+                                    <select class="second-score-input">
+                                        <option value="">Select</option>
+                                        <option value="M">M</option>
+                                        <option value="R">R</option>
+                                        <option value="X">X</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-add-student" onclick="addStudentToLO(this)">Add Student</button>
                         </div>
                     </div>
                 </div>
