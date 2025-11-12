@@ -1,3 +1,217 @@
+// Full list of 20 students for the class
+const allStudents = [
+    'Adams, John',
+    'Basic, Anna',
+    'Smith, George W.',
+    'Tucker, Cameron',
+    'Anderson, Emily',
+    'Brown, Michael',
+    'Chen, Sarah',
+    'Davis, Robert',
+    'Evans, Jessica',
+    'Garcia, Daniel',
+    'Harris, Olivia',
+    'Jackson, William',
+    'Johnson, Sophia',
+    'Lee, Christopher',
+    'Martinez, Isabella',
+    'Miller, Matthew',
+    'Moore, Ava',
+    'Rodriguez, James',
+    'Taylor, Emma',
+    'Wilson, Alexander'
+];
+
+// Initialize student dropdowns when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    updateAllStudentDropdowns();
+});
+
+// Update all student dropdowns to show only students not in this LO
+function updateAllStudentDropdowns() {
+    const loItems = document.querySelectorAll('.lo-item');
+    
+    loItems.forEach(loItem => {
+        const loName = loItem.dataset.loName;
+        const select = loItem.querySelector('.student-name-select');
+        
+        if (!select) return;
+        
+        // Get students already in this LO
+        const existingStudents = new Set();
+        loItem.querySelectorAll('.student-row .student-name').forEach(nameEl => {
+            existingStudents.add(nameEl.textContent.trim());
+        });
+        
+        // Clear and repopulate dropdown
+        select.innerHTML = '<option value="">Select a student</option>';
+        
+        // Add students not in this LO
+        allStudents.forEach(student => {
+            if (!existingStudents.has(student)) {
+                const option = document.createElement('option');
+                option.value = student;
+                option.textContent = student;
+                select.appendChild(option);
+            }
+        });
+        
+        // Show message if all students are added
+        if (existingStudents.size >= allStudents.length) {
+            select.innerHTML = '<option value="">All students added</option>';
+            select.disabled = true;
+        }
+    });
+}
+
+// Handle student selection (optional for future enhancements)
+function handleStudentSelect(select) {
+    // Optional: You can add any behavior here when a student is selected
+}
+
+// Add student to Learning Objective
+function addStudentToLO(button) {
+    const form = button.closest('.add-student-form');
+    const loItem = button.closest('.lo-item');
+    const loName = loItem.dataset.loName;
+    
+    // Get input values
+    const studentName = form.querySelector('.student-name-select').value.trim();
+    const topScore = form.querySelector('.top-score-input').value;
+    const secondScore = form.querySelector('.second-score-input').value;
+    
+    // Validation
+    if (!studentName) {
+        alert('Please select a student');
+        return;
+    }
+    if (!topScore) {
+        alert('Please select a top highest score');
+        return;
+    }
+    if (!secondScore) {
+        alert('Please select a second highest score');
+        return;
+    }
+    
+    // Count M's to determine mastery level
+    let mCount = 0;
+    if (topScore === 'M') mCount++;
+    if (secondScore === 'M') mCount++;
+    
+    // Find the appropriate mastery group
+    const masteryGroup = loItem.querySelector(`.mastery-group[data-mastery="${mCount}"]`);
+    const studentRowsContainer = masteryGroup.querySelector('.student-rows-container');
+    
+    // Create new student row
+    const newRow = document.createElement('div');
+    newRow.className = 'student-row';
+    newRow.innerHTML = `
+        <div class="student-name">${studentName}</div>
+        <div class="score-badge">Top Highest: ${topScore}</div>
+        <div class="score-badge">Second Highest: ${secondScore}</div>
+    `;
+    
+    // Add to the appropriate section
+    studentRowsContainer.appendChild(newRow);
+    
+    // Update count
+    const countSpan = masteryGroup.querySelector('.mastery-count');
+    const currentCount = countSpan.textContent.split('/');
+    const newCount = parseInt(currentCount[0]) + 1;
+    const total = parseInt(currentCount[1]) + 1;
+    countSpan.textContent = `${newCount}/${total}`;
+    
+    // Update total in all mastery groups for this LO
+    loItem.querySelectorAll('.mastery-count').forEach(span => {
+        const parts = span.textContent.split('/');
+        span.textContent = `${parts[0]}/${total}`;
+    });
+    
+    // Add student to "By Students" view
+    addStudentToStudentsView(studentName, loName, topScore, secondScore);
+    
+    // Clear form
+    form.querySelector('.student-name-select').value = '';
+    form.querySelector('.top-score-input').value = '';
+    form.querySelector('.second-score-input').value = '';
+    
+    // Update all dropdowns to remove this student from other LOs
+    updateAllStudentDropdowns();
+    
+    // Show success message
+    const originalText = button.textContent;
+    button.textContent = '✓ Added!';
+    button.style.background = '#4ade80';
+    setTimeout(() => {
+        button.textContent = originalText;
+        button.style.background = '';
+    }, 2000);
+}
+
+// Add student to the "By Students" view
+function addStudentToStudentsView(studentName, loName, topScore, secondScore) {
+    const studentList = document.querySelector('#studentsView .student-list');
+    
+    // Check if student already exists
+    let existingStudent = null;
+    const studentItems = studentList.querySelectorAll('.student-item');
+    
+    for (let item of studentItems) {
+        const nameElement = item.querySelector('.student-header span');
+        if (nameElement && nameElement.textContent.trim() === studentName) {
+            existingStudent = item;
+            break;
+        }
+    }
+    
+    if (existingStudent) {
+        // Add LO to existing student
+        const loContent = existingStudent.querySelector('.learning-objectives-content');
+        const newLORow = document.createElement('div');
+        newLORow.className = 'lo-row';
+        newLORow.innerHTML = `
+            <div class="lo-name">${loName}</div>
+            <div class="lo-score">Top Highest: ${topScore}</div>
+            <div class="lo-score">Second Highest: ${secondScore}</div>
+        `;
+        loContent.appendChild(newLORow);
+    } else {
+        // Create new student entry
+        const newStudentItem = document.createElement('div');
+        newStudentItem.className = 'student-item';
+        newStudentItem.innerHTML = `
+            <div class="student-header" onclick="toggleStudent(this)">
+                <span>${studentName}</span>
+                <div class="chevron"></div>
+            </div>
+            <div class="learning-objectives-content">
+                <div class="lo-row">
+                    <div class="lo-name">${loName}</div>
+                    <div class="lo-score">Top Highest: ${topScore}</div>
+                    <div class="lo-score">Second Highest: ${secondScore}</div>
+                </div>
+            </div>
+        `;
+        
+        // Insert in alphabetical order
+        let inserted = false;
+        for (let item of studentItems) {
+            const nameElement = item.querySelector('.student-header span');
+            if (nameElement && nameElement.textContent.trim() > studentName) {
+                studentList.insertBefore(newStudentItem, item);
+                inserted = true;
+                break;
+            }
+        }
+        
+        // If not inserted, add to the end
+        if (!inserted) {
+            studentList.appendChild(newStudentItem);
+        }
+    }
+}
+
 // Toggle individual student
 function toggleStudent(header) {
     const item = header.parentElement;
