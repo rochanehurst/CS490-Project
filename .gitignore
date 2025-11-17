@@ -1,4 +1,14 @@
+# Environment variables
+.env
+
+# Virtual environment
+venv/
+
+# Python cache
 __pycache__/
 *.pyc
-venv/
-.venv/
+
+# Mac + IDE junk
+.DS_Store
+.vscode/
+.idea/
