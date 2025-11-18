@@ -89,10 +89,10 @@ function addStudentToLO(button) {
         alert('Please select a top highest score');
         return;
     }
-    if (!secondScore) {
-        alert('Please select a second highest score');
-        return;
-    }
+    // if (!secondScore) {
+    //     alert('Please select a second highest score');
+    //     return;
+    // }
     
     // Count M's to determine mastery level
     let mCount = 0;
