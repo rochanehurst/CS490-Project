@@ -34,6 +34,11 @@ p {
     color: var(--bg-light-text-color);
 }
 
+a {
+    color: var(--medium-orange);
+    text-decoration: none;
+}
+
 main {
     display: flex;
     justify-content: center;
@@ -104,7 +109,7 @@ main {
 }
 
 .btn-role:hover:not(.active-role) {
-    background-color: var(--orange-accent);
+    background-color: var(--medium-orange);
 }
 
 .btn:hover {
@@ -134,7 +139,7 @@ main {
 
 .form-control {
     padding: 0.75rem;
-    border: 2px solid var(--medium-orange);
+    border: 2px solid var(--orange-accent);
     border-radius: 8px;
     font-size: 1rem;
     width: 100%;
