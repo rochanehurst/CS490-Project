@@ -1,3 +1,6 @@
+![Project Clarity Logo](https://github.com/rochanehurst/CS490-Project/blob/main/app/static/project%20clarity.png) # Project Clarity
+## *A solution through technology*
+
 !! Put Trello board link and all of our names here + the logo and the project title.
 !! add roxie's email so they can contact if there are questions
 
