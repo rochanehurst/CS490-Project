@@ -1,3 +1,5 @@
+!! Put Trello board link and all of our names here + the logo and the project title.
+
 ## Delete once we all have the environment set up
 
 1. Install Python 3.10+
