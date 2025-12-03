@@ -1,4 +1,5 @@
 !! Put Trello board link and all of our names here + the logo and the project title.
+!! add roxie's email so they can contact if there are questions
 
 ## Delete once we all have the environment set up
 
