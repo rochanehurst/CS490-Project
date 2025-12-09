@@ -134,7 +134,7 @@ def organize_by_learning_objectives(students):
 
 @main_bp.route("/")
 def home():
-    return render_template("signup.html")
+    return render_template("login.html")
 
 @main_bp.route("/login")
 def login_page():
