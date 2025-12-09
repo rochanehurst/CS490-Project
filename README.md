@@ -3,9 +3,9 @@
 [Trello Board](https://trello.com/invite/b/68bf3e9136c3e0a41a3eaf75/ATTIbe2f2fa855e88a880d9a80411c8fc80d442F1B82/cs-490-capstone)
 
 **If there are questions, feel free to contact:**
-Jason Forbes (jasonforbes142@gmail.com)
-Rochane Hurst (hurst025@csusm.edu)
-Cassidy Klein (cassiv057@gmail.com), for UI and CSS specifically
+* Jason Forbes (jasonforbes142@gmail.com)
+* Rochane Hurst (hurst025@csusm.edu)
+* Cassidy Klein (cassiv057@gmail.com), for UI and CSS specifically
 
 ## Installation/Run Instructions
 
